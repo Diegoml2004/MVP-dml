@@ -1,0 +1,114 @@
+{
+    "banano": {
+        "ndvi_min": 0.5,
+        "lluvia_min": 40,
+        "temperatura_max": 34,
+        "recomendacion_baja": "Condiciones ideales para el cultivo de banano.",
+        "recomendacion_media": "Monitorear humedad del suelo y fertilización.",
+        "recomendacion_alta": "Riesgo alto. Aplicar riego o sombra."
+    },
+    "plátano": {
+        "ndvi_min": 0.5,
+        "lluvia_min": 35,
+        "temperatura_max": 33,
+        "recomendacion_baja": "Plántulas saludables.",
+        "recomendacion_media": "Riego moderado y control de malezas.",
+        "recomendacion_alta": "Alerta crítica: condiciones de estrés."
+    },
+    "arroz": {
+        "ndvi_min": 0.45,
+        "lluvia_min": 30,
+        "temperatura_max": 35,
+        "recomendacion_baja": "Buen desarrollo del arroz.",
+        "recomendacion_media": "Evaluar nutrientes del agua.",
+        "recomendacion_alta": "Sequía o calor extremo detectado."
+    },
+    "cacao": {
+        "ndvi_min": 0.55,
+        "lluvia_min": 50,
+        "temperatura_max": 32,
+        "recomendacion_baja": "Condiciones óptimas para cacao.",
+        "recomendacion_media": "Atención al control de sombra y humedad.",
+        "recomendacion_alta": "Condiciones desfavorables. Regar y proteger."
+    },
+    "maíz": {
+        "ndvi_min": 0.4,
+        "lluvia_min": 25,
+        "temperatura_max": 36,
+        "recomendacion_baja": "Crecimiento adecuado.",
+        "recomendacion_media": "Revisar fertilización y plagas.",
+        "recomendacion_alta": "Alto riesgo por falta de agua o calor."
+    },
+    "papaya": {
+        "ndvi_min": 0.5,
+        "lluvia_min": 30,
+        "temperatura_max": 34,
+        "recomendacion_baja": "Condiciones favorables.",
+        "recomendacion_media": "Aplicar riego regular.",
+        "recomendacion_alta": "Posible estrés térmico o hídrico."
+    },
+    "sandía": {
+        "ndvi_min": 0.45,
+        "lluvia_min": 20,
+        "temperatura_max": 38,
+        "recomendacion_baja": "Buen desarrollo de frutos.",
+        "recomendacion_media": "Monitorear riego.",
+        "recomendacion_alta": "Riesgo alto de marchitamiento."
+    },
+    "melón": {
+        "ndvi_min": 0.45,
+        "lluvia_min": 20,
+        "temperatura_max": 37,
+        "recomendacion_baja": "Condiciones adecuadas.",
+        "recomendacion_media": "Evaluar frecuencia de riego.",
+        "recomendacion_alta": "Temperaturas altas, aplicar riego urgente."
+    },
+    "yuca": {
+        "ndvi_min": 0.4,
+        "lluvia_min": 30,
+        "temperatura_max": 35,
+        "recomendacion_baja": "Desarrollo radicular normal.",
+        "recomendacion_media": "Revisar humedad del suelo.",
+        "recomendacion_alta": "Bajo desarrollo esperado. Riesgo alto."
+    },
+    "tomate": {
+        "ndvi_min": 0.5,
+        "lluvia_min": 25,
+        "temperatura_max": 32,
+        "recomendacion_baja": "Buena producción esperada.",
+        "recomendacion_media": "Cuidado con exceso de calor.",
+        "recomendacion_alta": "Temperatura excesiva y/o falta de agua."
+    },
+    "pimiento": {
+        "ndvi_min": 0.5,
+        "lluvia_min": 25,
+        "temperatura_max": 32,
+        "recomendacion_baja": "Condiciones ideales.",
+        "recomendacion_media": "Monitorear agua y nutrientes.",
+        "recomendacion_alta": "Condiciones limitantes. Intervenir."
+    },
+    "caña de azúcar": {
+        "ndvi_min": 0.55,
+        "lluvia_min": 40,
+        "temperatura_max": 36,
+        "recomendacion_baja": "Producción en condiciones óptimas.",
+        "recomendacion_media": "Monitorear estrés hídrico.",
+        "recomendacion_alta": "Fuerte riesgo climático."
+    },
+    "piña": {
+        "ndvi_min": 0.5,
+        "lluvia_min": 35,
+        "temperatura_max": 33,
+        "recomendacion_baja": "Fructificación adecuada.",
+        "recomendacion_media": "Ajustar fertilización.",
+        "recomendacion_alta": "Condiciones desfavorables."
+    },
+    "fréjol": {
+        "ndvi_min": 0.4,
+        "lluvia_min": 20,
+        "temperatura_max": 34,
+        "recomendacion_baja": "Buen desarrollo vegetativo.",
+        "recomendacion_media": "Atención al riego.",
+        "recomendacion_alta": "Estrés ambiental presente."
+    }
+}

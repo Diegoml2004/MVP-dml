@@ -72,12 +72,12 @@ def tab_subir_archivo():
             st.success("✅ Ubicación añadida")
             st.dataframe(st.session_state.df, use_container_width=True)
 
-        st.markdown("### 💾 Descargar zonas actuales")
-        csv_actualizado = st.session_state.df.to_csv(index=False).encode("utf-8")
+        st.markdown("### 💾 Descargar resultados de riesgo")
+        csv_resultados = st.session_state.resultados.to_csv(index=False).encode("utf-8")
         st.download_button(
-            label="📥 Descargar CSV actualizado",
-            data=csv_actualizado,
-            file_name="zonas_actualizadas.csv",
+            label="📥 Descargar CSV de resultados",
+            data=csv_resultados,
+            file_name="evaluacion_riesgo.csv",
             mime="text/csv"
         )
 

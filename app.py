@@ -69,8 +69,11 @@ def tab_subir_archivo():
             st.session_state.df = pd.concat([st.session_state.df, nueva_fila], ignore_index=True)
             st.success("✅ Ubicación añadida")
             st.dataframe(st.session_state.df, use_container_width=True)
+            st.session_state.resultados = evaluar_riesgo(st.session_state.df, st.session_state.config_cultivos)
 
-        # Botón para descargar el archivo actualizado con zonas
+
+        # Botón para descargar el archivo actust.success("✅ Ubicación añadida y riesgo evaluado. Ahora puedes verla en el mapa.")
+alizado con zonas
         st.markdown("### 💾 Descargar zonas actuales")
         csv_actualizado = st.session_state.df.to_csv(index=False).encode("utf-8")
         st.download_button(

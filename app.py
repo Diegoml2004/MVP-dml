@@ -4,6 +4,8 @@ import json
 import random
 import folium
 from streamlit_folium import st_folium
+import io
+from pandas import ExcelWriter
 
 st.set_page_config(page_title="Detección de Riesgo Agrícola", layout="wide")
 st.title("🌾 Detección de Riesgo Agrícola - MVP")
@@ -145,13 +147,16 @@ def tab_evaluacion_riesgo():
 
         # NUEVO: Botón para descargar resultados de riesgo
         st.markdown("### 💾 Descargar resultados de riesgo")
-        csv_resultados = st.session_state.resultados.to_csv(index=False).encode("utf-8")
-        st.download_button(
-            label="📥 Descargar CSV de resultados",
-            data=csv_resultados,
-            file_name="evaluacion_riesgo.csv",
-            mime="text/csv"
-        )
+buffer = io.BytesIO()
+with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+    st.session_state.resultados.to_excel(writer, index=False, sheet_name="Riesgo")
+
+st.download_button(
+    label="📥 Descargar resultados como Excel",
+    data=buffer.getvalue(),
+    file_name="evaluacion_riesgo.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
 
 # TAB 3 - Mapa con riesgos
 def tab_mapa():

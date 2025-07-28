@@ -158,10 +158,66 @@ def tab_mapa():
     with tabs[2]:
         st.header("🗺️ Mapa de zonas con nivel de riesgo")
 
+        # Si no hay resultados, pero sí hay datos, se calcula el riesgo
+        if ("resultados" not in st.session_state or st.session_state.resultados.empty) and not st.session_state.df.empty:
+            config_cultivos = st.session_state.config_cultivos
+            resultados = []
+            for _, fila in st.session_state.df.iterrows():
+                zona = fila["zona"]
+                cultivo = fila["cultivo"].strip().lower()
+                lat = fila["lat"]
+                lon = fila["lon"]
+
+                if cultivo not in config_cultivos:
+                    continue
+
+                reglas = config_cultivos[cultivo]
+                random.seed(f"{zona}{cultivo}{lat}{lon}")
+                ndvi = round(random.uniform(0.2, 0.8), 2)
+                lluvia = round(random.uniform(0, 50), 1)
+                temperatura = round(random.uniform(20, 40), 1)
+
+                riesgo = "Bajo"
+                recomendacion = reglas["recomendacion_baja"]
+
+                if ndvi < reglas["ndvi_min"] or lluvia < reglas["lluvia_min"] or temperatura > reglas["temperatura_max"]:
+                    riesgo = "Medio"
+                    recomendacion = reglas["recomendacion_media"]
+
+                if (ndvi < reglas["ndvi_min"] * 0.8) or (lluvia < reglas["lluvia_min"] * 0.5) or (temperatura > reglas["temperatura_max"] + 2):
+                    riesgo = "Alto"
+                    recomendacion = reglas["recomendacion_alta"]
+
+                motivos = []
+                if ndvi < reglas["ndvi_min"]:
+                    motivos.append("NDVI bajo")
+                if lluvia < reglas["lluvia_min"]:
+                    motivos.append("lluvia insuficiente")
+                if temperatura > reglas["temperatura_max"]:
+                    motivos.append("temperatura excesiva")
+                if not motivos:
+                    motivos = ["Todos los parámetros dentro de rango"]
+
+                resultados.append({
+                    "zona": zona,
+                    "cultivo": cultivo,
+                    "lat": lat,
+                    "lon": lon,
+                    "NDVI": ndvi,
+                    "lluvia (mm)": lluvia,
+                    "temperatura (°C)": temperatura,
+                    "riesgo": riesgo,
+                    "recomendación": recomendacion,
+                    "motivo_riesgo": ", ".join(motivos)
+                })
+
+            st.session_state.resultados = pd.DataFrame(resultados)
+
         if "resultados" not in st.session_state or st.session_state.resultados.empty:
-            st.warning("⚠️ Aún no se han evaluado zonas. Ve al tab 'Evaluación de Riesgo'.")
+            st.warning("⚠️ Aún no se han evaluado zonas. Ve al tab 'Subir archivo'.")
             return
 
+        # Mostrar el mapa
         m = folium.Map(location=[-1.8, -79.0], zoom_start=7)
 
         def color_por_riesgo(nivel):

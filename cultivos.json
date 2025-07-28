@@ -1,4 +1,4 @@
-cultivos_data = {
+
     "banano": {
         "ndvi_min": 0.5,
         "lluvia_min": 30,

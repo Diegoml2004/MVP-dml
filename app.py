@@ -53,7 +53,7 @@ def tab_subir_archivo():
         col1, col2 = st.columns(2)
         with col1:
             nombre_manual = st.text_input("Nombre de la zona")
-            cultivo_manual = st.selectbox("Cultivo", st.session_state.cultivos_disponibles)
+            cultivo_manual = st.selectbox("Cultivo", list(st.session_state.config_cultivos.keys()))
         with col2:
             lat_manual = st.number_input("Latitud", format="%.6f")
             lon_manual = st.number_input("Longitud", format="%.6f")

@@ -71,15 +71,17 @@ def tab_subir_archivo():
             st.session_state.df = pd.concat([st.session_state.df, nueva_fila], ignore_index=True)
             st.success("✅ Ubicación añadida")
             st.dataframe(st.session_state.df, use_container_width=True)
-
-        st.markdown("### 💾 Descargar resultados de riesgo")
-        csv_resultados = st.session_state.resultados.to_csv(index=False).encode("utf-8")
-        st.download_button(
-            label="📥 Descargar CSV de resultados",
-            data=csv_resultados,
-            file_name="evaluacion_riesgo.csv",
-            mime="text/csv"
-        )
+st.markdown("### 💾 Descargar resultados de riesgo")
+if "resultados" in st.session_state and not st.session_state.resultados.empty:
+    csv_resultados = st.session_state.resultados.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        label="📥 Descargar CSV de resultados",
+        data=csv_resultados,
+        file_name="evaluacion_riesgo.csv",
+        mime="text/csv"
+    )
+else:
+    st.info("ℹ️ No hay resultados disponibles aún para descargar.")
 
 # TAB 2 - Evaluación de riesgo por zona
 def tab_evaluacion_riesgo():

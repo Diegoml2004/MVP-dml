@@ -146,17 +146,18 @@ def tab_evaluacion_riesgo():
         st.dataframe(st.session_state.resultados, use_container_width=True)
 
         # NUEVO: Botón para descargar resultados de riesgo
-        st.markdown("### 💾 Descargar resultados de riesgo")
-buffer = io.BytesIO()
-with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-    st.session_state.resultados.to_excel(writer, index=False, sheet_name="Riesgo")
+st.markdown("### 📥 Descargar resultados de riesgo")
 
-st.download_button(
-    label="📥 Descargar resultados como Excel",
-    data=buffer.getvalue(),
-    file_name="evaluacion_riesgo.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-)
+    buffer = io.BytesIO()
+    with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+        st.session_state.resultados.to_excel(writer, index=False, sheet_name="Riesgo")
+
+    st.download_button(
+        label="📄 Descargar resultados como Excel",
+        data=buffer.getvalue(),
+        file_name="evaluacion_riesgo.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 # TAB 3 - Mapa con riesgos
 def tab_mapa():

@@ -146,7 +146,7 @@ def tab_evaluacion_riesgo():
         st.dataframe(st.session_state.resultados, use_container_width=True)
 
         # NUEVO: Botón para descargar resultados de riesgo
-st.markdown("### 📥 Descargar resultados de riesgo")
+    st.markdown("### 📥 Descargar resultados de riesgo")
 
     buffer = io.BytesIO()
     with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:

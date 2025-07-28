@@ -1,114 +1,114 @@
-{
+cultivos_data = {
     "banano": {
         "ndvi_min": 0.5,
-        "lluvia_min": 40,
+        "lluvia_min": 30,
         "temperatura_max": 34,
-        "recomendacion_baja": "Condiciones ideales para el cultivo de banano.",
-        "recomendacion_media": "Monitorear humedad del suelo y fertilización.",
-        "recomendacion_alta": "Riesgo alto. Aplicar riego o sombra."
+        "recomendacion_alta": "Aplicar riego urgente, fertilización foliar y control fitosanitario.",
+        "recomendacion_media": "Monitorear drenaje y reforzar aplicación de potasio.",
+        "recomendacion_baja": "Mantener fertilización y control de malezas cada 10 días."
     },
     "plátano": {
         "ndvi_min": 0.5,
-        "lluvia_min": 35,
-        "temperatura_max": 33,
-        "recomendacion_baja": "Plántulas saludables.",
-        "recomendacion_media": "Riego moderado y control de malezas.",
-        "recomendacion_alta": "Alerta crítica: condiciones de estrés."
+        "lluvia_min": 30,
+        "temperatura_max": 34,
+        "recomendacion_alta": "Reforzar humedad del suelo y aplicar bioestimulantes.",
+        "recomendacion_media": "Realizar deshoje sanitario y revisar presencia de trips.",
+        "recomendacion_baja": "Mantener labores culturales y monitorear clima semanalmente."
     },
     "arroz": {
-        "ndvi_min": 0.45,
-        "lluvia_min": 30,
+        "ndvi_min": 0.6,
+        "lluvia_min": 40,
         "temperatura_max": 35,
-        "recomendacion_baja": "Buen desarrollo del arroz.",
-        "recomendacion_media": "Evaluar nutrientes del agua.",
-        "recomendacion_alta": "Sequía o calor extremo detectado."
+        "recomendacion_alta": "Aumentar lámina de riego y aplicar fungicida preventivo.",
+        "recomendacion_media": "Verificar nivel de agua y ajustar nitrógeno.",
+        "recomendacion_baja": "Continuar manejo regular y revisar cada 5 días."
     },
     "cacao": {
-        "ndvi_min": 0.55,
-        "lluvia_min": 50,
-        "temperatura_max": 32,
-        "recomendacion_baja": "Condiciones óptimas para cacao.",
-        "recomendacion_media": "Atención al control de sombra y humedad.",
-        "recomendacion_alta": "Condiciones desfavorables. Regar y proteger."
+        "ndvi_min": 0.5,
+        "lluvia_min": 35,
+        "temperatura_max": 33,
+        "recomendacion_alta": "Aplicar poda sanitaria y fungicidas, asegurar buena ventilación.",
+        "recomendacion_media": "Revisar sombra y control de Phytophthora.",
+        "recomendacion_baja": "Mantener labores de mantenimiento y control de malezas."
     },
     "maíz": {
-        "ndvi_min": 0.4,
+        "ndvi_min": 0.55,
         "lluvia_min": 25,
         "temperatura_max": 36,
-        "recomendacion_baja": "Crecimiento adecuado.",
-        "recomendacion_media": "Revisar fertilización y plagas.",
-        "recomendacion_alta": "Alto riesgo por falta de agua o calor."
+        "recomendacion_alta": "Aplicar riego suplementario y reforzar fertilización nitrogenada.",
+        "recomendacion_media": "Monitorear hojas por clorosis y controlar malezas.",
+        "recomendacion_baja": "Seguir manejo actual con monitoreo cada semana."
     },
     "papaya": {
         "ndvi_min": 0.5,
         "lluvia_min": 30,
         "temperatura_max": 34,
-        "recomendacion_baja": "Condiciones favorables.",
-        "recomendacion_media": "Aplicar riego regular.",
-        "recomendacion_alta": "Posible estrés térmico o hídrico."
+        "recomendacion_alta": "Reforzar riego por goteo y aplicar insecticidas selectivos.",
+        "recomendacion_media": "Monitorear ácaros y ajustar dosis de potasio.",
+        "recomendacion_baja": "Mantener monitoreo de plagas y aplicar compost orgánico."
     },
     "sandía": {
-        "ndvi_min": 0.45,
+        "ndvi_min": 0.5,
         "lluvia_min": 20,
-        "temperatura_max": 38,
-        "recomendacion_baja": "Buen desarrollo de frutos.",
-        "recomendacion_media": "Monitorear riego.",
-        "recomendacion_alta": "Riesgo alto de marchitamiento."
+        "temperatura_max": 35,
+        "recomendacion_alta": "Aumentar irrigación y proteger frutos del sol directo.",
+        "recomendacion_media": "Revisar flores y aplicar fertilización potásica.",
+        "recomendacion_baja": "Mantener control de malezas y revisar cada 4 días."
     },
     "melón": {
-        "ndvi_min": 0.45,
+        "ndvi_min": 0.5,
         "lluvia_min": 20,
-        "temperatura_max": 37,
-        "recomendacion_baja": "Condiciones adecuadas.",
-        "recomendacion_media": "Evaluar frecuencia de riego.",
-        "recomendacion_alta": "Temperaturas altas, aplicar riego urgente."
+        "temperatura_max": 35,
+        "recomendacion_alta": "Aplicar riego profundo y prevenir oídio con fungicidas.",
+        "recomendacion_media": "Monitorear estado del follaje y ajustar riego.",
+        "recomendacion_baja": "Continuar monitoreo básico y aplicación foliar balanceada."
     },
     "yuca": {
         "ndvi_min": 0.4,
-        "lluvia_min": 30,
-        "temperatura_max": 35,
-        "recomendacion_baja": "Desarrollo radicular normal.",
-        "recomendacion_media": "Revisar humedad del suelo.",
-        "recomendacion_alta": "Bajo desarrollo esperado. Riesgo alto."
+        "lluvia_min": 25,
+        "temperatura_max": 34,
+        "recomendacion_alta": "Aplicar fertilizantes fosfatados y monitorear plagas de raíz.",
+        "recomendacion_media": "Mejorar drenaje y controlar ácaros.",
+        "recomendacion_baja": "Seguir manejo regular y vigilar clima."
     },
     "tomate": {
         "ndvi_min": 0.5,
         "lluvia_min": 25,
-        "temperatura_max": 32,
-        "recomendacion_baja": "Buena producción esperada.",
-        "recomendacion_media": "Cuidado con exceso de calor.",
-        "recomendacion_alta": "Temperatura excesiva y/o falta de agua."
+        "temperatura_max": 34,
+        "recomendacion_alta": "Proteger del sol excesivo y reforzar riego por goteo.",
+        "recomendacion_media": "Ajustar fertilización y revisar por tizón temprano.",
+        "recomendacion_baja": "Continuar manejo actual y revisión cada 3 días."
     },
     "pimiento": {
         "ndvi_min": 0.5,
         "lluvia_min": 25,
-        "temperatura_max": 32,
-        "recomendacion_baja": "Condiciones ideales.",
-        "recomendacion_media": "Monitorear agua y nutrientes.",
-        "recomendacion_alta": "Condiciones limitantes. Intervenir."
+        "temperatura_max": 34,
+        "recomendacion_alta": "Reforzar riego, aplicar insecticida sistémico.",
+        "recomendacion_media": "Controlar mosca blanca y ajustar nutrición.",
+        "recomendacion_baja": "Mantener poda y monitoreo cada 5 días."
     },
     "caña de azúcar": {
         "ndvi_min": 0.55,
-        "lluvia_min": 40,
+        "lluvia_min": 35,
         "temperatura_max": 36,
-        "recomendacion_baja": "Producción en condiciones óptimas.",
-        "recomendacion_media": "Monitorear estrés hídrico.",
-        "recomendacion_alta": "Fuerte riesgo climático."
+        "recomendacion_alta": "Aplicar riego intensivo y revisión fitosanitaria.",
+        "recomendacion_media": "Revisar brotes y reforzar fertilización.",
+        "recomendacion_baja": "Monitorear plagas y continuar labores normales."
     },
     "piña": {
-        "ndvi_min": 0.5,
-        "lluvia_min": 35,
-        "temperatura_max": 33,
-        "recomendacion_baja": "Fructificación adecuada.",
-        "recomendacion_media": "Ajustar fertilización.",
-        "recomendacion_alta": "Condiciones desfavorables."
+        "ndvi_min": 0.55,
+        "lluvia_min": 30,
+        "temperatura_max": 34,
+        "recomendacion_alta": "Aumentar riego y aplicar bioestimulantes vegetativos.",
+        "recomendacion_media": "Controlar ácaros y ajustar nutrición potásica.",
+        "recomendacion_baja": "Mantener cobertura vegetal y monitoreo quincenal."
     },
     "fréjol": {
-        "ndvi_min": 0.4,
-        "lluvia_min": 20,
-        "temperatura_max": 34,
-        "recomendacion_baja": "Buen desarrollo vegetativo.",
-        "recomendacion_media": "Atención al riego.",
-        "recomendacion_alta": "Estrés ambiental presente."
+        "ndvi_min": 0.45,
+        "lluvia_min": 25,
+        "temperatura_max": 33,
+        "recomendacion_alta": "Aplicar riego por surcos y revisar hongos del suelo.",
+        "recomendacion_media": "Monitorear hojas por deficiencias y controlar pulgones.",
+        "recomendacion_baja": "Mantener abonado foliar y revisión regular."
     }
 }

@@ -3,10 +3,27 @@ import pandas as pd
 import json
 import random
 import folium
+import requests
+import datetime
 from streamlit_folium import st_folium
+from descargar_ndvi import descargar_ndvi
 
 st.set_page_config(page_title="Detección de Riesgo Agrícola", layout="wide")
 st.title("🌾 Detección de Riesgo Agrícola - MVP")
+
+# Función para obtener clima real desde NASA POWER
+def obtener_datos_climaticos(lat, lon):
+    hoy = datetime.date.today()
+    ayer = hoy - datetime.timedelta(days=1)
+    url = f"https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,PRECTOT&community=AG&longitude={lon}&latitude={lat}&start={ayer.strftime('%Y%m%d')}&end={ayer.strftime('%Y%m%d')}&format=JSON"
+    try:
+        response = requests.get(url)
+        data = response.json()
+        temperatura = data['properties']['parameter']['T2M'][ayer.strftime('%Y%m%d')]
+        lluvia = data['properties']['parameter']['PRECTOT'][ayer.strftime('%Y%m%d')]
+        return temperatura, lluvia
+    except:
+        return None, None
 
 # Variables de sesión para mantener los datos
 if "df" not in st.session_state:
@@ -53,7 +70,7 @@ def tab_subir_archivo():
         col1, col2 = st.columns(2)
         with col1:
             nombre_manual = st.text_input("Nombre de la zona")
-            cultivo_manual = st.selectbox("Cultivo", list(st.session_state.config_cultivos.keys()))
+            cultivo_manual = st.selectbox("Cultivo", st.session_state.cultivos_disponibles)
         with col2:
             lat_manual = st.number_input("Latitud", format="%.6f")
             lon_manual = st.number_input("Longitud", format="%.6f")
@@ -70,6 +87,7 @@ def tab_subir_archivo():
             st.success("✅ Ubicación añadida")
             st.dataframe(st.session_state.df, use_container_width=True)
 
+        # Botón para descargar el archivo actualizado con zonas
         st.markdown("### 💾 Descargar zonas actuales")
         csv_actualizado = st.session_state.df.to_csv(index=False).encode("utf-8")
         st.download_button(
@@ -101,10 +119,19 @@ def tab_evaluacion_riesgo():
                 continue
 
             reglas = config_cultivos[cultivo]
-            random.seed(f"{zona}{cultivo}{lat}{lon}")  # Semilla fija para evitar blinbineo
+            random.seed(f"{zona}{cultivo}{lat}{lon}")
             ndvi = round(random.uniform(0.2, 0.8), 2)
-            lluvia = round(random.uniform(0, 50), 1)
-            temperatura = round(random.uniform(20, 40), 1)
+
+            temperatura, lluvia = obtener_datos_climaticos(lat, lon)
+            if temperatura is None or lluvia is None:
+                temperatura = round(random.uniform(20, 40), 1)
+                lluvia = round(random.uniform(0, 50), 1)
+
+            # Nueva llamada para descargar imagen NDVI
+            try:
+                descargar_ndvi(lat, lon, nombre_archivo=f"ndvi_{zona.replace(' ', '_')}.png")
+            except Exception as e:
+                st.warning(f"No se pudo descargar imagen NDVI para {zona}: {e}")
 
             riesgo = "Bajo"
             recomendacion = reglas["recomendacion_baja"]
@@ -143,7 +170,7 @@ def tab_evaluacion_riesgo():
         st.session_state.resultados = pd.DataFrame(resultados)
         st.dataframe(st.session_state.resultados, use_container_width=True)
 
-        # NUEVO: Botón para descargar resultados de riesgo
+        # Botón para descargar resultados
         st.markdown("### 💾 Descargar resultados de riesgo")
         csv_resultados = st.session_state.resultados.to_csv(index=False).encode("utf-8")
         st.download_button(
@@ -158,66 +185,10 @@ def tab_mapa():
     with tabs[2]:
         st.header("🗺️ Mapa de zonas con nivel de riesgo")
 
-        # Si no hay resultados, pero sí hay datos, se calcula el riesgo
-        if ("resultados" not in st.session_state or st.session_state.resultados.empty) and not st.session_state.df.empty:
-            config_cultivos = st.session_state.config_cultivos
-            resultados = []
-            for _, fila in st.session_state.df.iterrows():
-                zona = fila["zona"]
-                cultivo = fila["cultivo"].strip().lower()
-                lat = fila["lat"]
-                lon = fila["lon"]
-
-                if cultivo not in config_cultivos:
-                    continue
-
-                reglas = config_cultivos[cultivo]
-                random.seed(f"{zona}{cultivo}{lat}{lon}")
-                ndvi = round(random.uniform(0.2, 0.8), 2)
-                lluvia = round(random.uniform(0, 50), 1)
-                temperatura = round(random.uniform(20, 40), 1)
-
-                riesgo = "Bajo"
-                recomendacion = reglas["recomendacion_baja"]
-
-                if ndvi < reglas["ndvi_min"] or lluvia < reglas["lluvia_min"] or temperatura > reglas["temperatura_max"]:
-                    riesgo = "Medio"
-                    recomendacion = reglas["recomendacion_media"]
-
-                if (ndvi < reglas["ndvi_min"] * 0.8) or (lluvia < reglas["lluvia_min"] * 0.5) or (temperatura > reglas["temperatura_max"] + 2):
-                    riesgo = "Alto"
-                    recomendacion = reglas["recomendacion_alta"]
-
-                motivos = []
-                if ndvi < reglas["ndvi_min"]:
-                    motivos.append("NDVI bajo")
-                if lluvia < reglas["lluvia_min"]:
-                    motivos.append("lluvia insuficiente")
-                if temperatura > reglas["temperatura_max"]:
-                    motivos.append("temperatura excesiva")
-                if not motivos:
-                    motivos = ["Todos los parámetros dentro de rango"]
-
-                resultados.append({
-                    "zona": zona,
-                    "cultivo": cultivo,
-                    "lat": lat,
-                    "lon": lon,
-                    "NDVI": ndvi,
-                    "lluvia (mm)": lluvia,
-                    "temperatura (°C)": temperatura,
-                    "riesgo": riesgo,
-                    "recomendación": recomendacion,
-                    "motivo_riesgo": ", ".join(motivos)
-                })
-
-            st.session_state.resultados = pd.DataFrame(resultados)
-
         if "resultados" not in st.session_state or st.session_state.resultados.empty:
             st.warning("⚠️ Aún no se han evaluado zonas. Ve al tab 'Subir archivo'.")
             return
 
-        # Mostrar el mapa
         m = folium.Map(location=[-1.8, -79.0], zoom_start=7)
 
         def color_por_riesgo(nivel):
@@ -231,7 +202,8 @@ def tab_mapa():
         for _, fila in st.session_state.resultados.iterrows():
             popup = (f"{fila['zona']} ({fila['riesgo']})"
                      f"<br><b>Recomendación:</b> {fila['recomendación']}"
-                     f"<br><b>Motivo:</b> {fila['motivo_riesgo']}")
+                     f"<br><b>Motivo:</b> {fila['motivo_riesgo']}" +
+                     f"<br><img src='ndvi_{fila['zona'].replace(' ', '_')}.png' width='100'>")
 
             folium.CircleMarker(
                 location=[fila["lat"], fila["lon"]],

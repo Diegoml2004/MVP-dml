@@ -1,13 +1,14 @@
 [project]
+name = "agtech"  # Puedes poner cualquier nombre, solo que no tenga caracteres especiales ni espacios
 version = "0.1.0"
 description = ""
-authors = ["Tu Nombre <tu@email.com>"]
+authors = ["Diego Molestina <you@example.com>"]
 requires-python = ">=3.11"
 dependencies = [
-  "folium>=0.20.0",
-  "pandas>=2.3.1",
-  "streamlit-folium>=0.25.0",
-  "streamlit>=1.47.0",
-  "python-dotenv>=1.0.0",
-  "requests>=2.31.0"
+    "streamlit>=1.47.0",
+    "pandas>=2.3.1",
+    "folium>=0.20.0",
+    "streamlit-folium>=0.25.0",
+    "python-dotenv>=1.0.1",
+    "requests>=2.31.0"
 ]

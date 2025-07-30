@@ -1,0 +1,13 @@
+[project]
+name = "agtech"
+version = "0.1.0"
+description = "MVP para detección de riesgo agrícola"
+authors = ["Diego Molestina <you@example.com>"]
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit==1.27.2",
+    "pandas>=2.0",
+    "folium==0.14.0",
+    "streamlit-folium==0.14.0",
+    "requests>=2.31"
+]

@@ -1,5 +1,4 @@
 [project]
-name = "app.py"
 version = "0.1.0"
 description = "MVP para detección de riesgo agrícola"
 authors = ["Diego Molestina <you@example.com>"]

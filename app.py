@@ -127,12 +127,6 @@ def tab_evaluacion_riesgo():
                 temperatura = round(random.uniform(20, 40), 1)
                 lluvia = round(random.uniform(0, 50), 1)
 
-            # Nueva llamada para descargar imagen NDVI
-            try:
-                descargar_ndvi(lat, lon, nombre_archivo=f"ndvi_{zona.replace(' ', '_')}.png")
-            except Exception as e:
-                st.warning(f"No se pudo descargar imagen NDVI para {zona}: {e}")
-
             riesgo = "Bajo"
             recomendacion = reglas["recomendacion_baja"]
 
@@ -202,8 +196,7 @@ def tab_mapa():
         for _, fila in st.session_state.resultados.iterrows():
             popup = (f"{fila['zona']} ({fila['riesgo']})"
                      f"<br><b>Recomendación:</b> {fila['recomendación']}"
-                     f"<br><b>Motivo:</b> {fila['motivo_riesgo']}" +
-                     f"<br><img src='ndvi_{fila['zona'].replace(' ', '_')}.png' width='100'>")
+                     f"<br><b>Motivo:</b> {fila['motivo_riesgo']}")
 
             folium.CircleMarker(
                 location=[fila["lat"], fila["lon"]],

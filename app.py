@@ -53,7 +53,7 @@ def tab_subir_archivo():
         col1, col2 = st.columns(2)
         with col1:
             nombre_manual = st.text_input("Nombre de la zona")
-            cultivo_manual = st.selectbox("Cultivo", st.session_state.cultivos_disponibles)
+            cultivo_manual = st.selectbox("Cultivo", list(st.session_state.config_cultivos.keys()))
         with col2:
             lat_manual = st.number_input("Latitud", format="%.6f")
             lon_manual = st.number_input("Longitud", format="%.6f")
@@ -70,7 +70,6 @@ def tab_subir_archivo():
             st.success("✅ Ubicación añadida")
             st.dataframe(st.session_state.df, use_container_width=True)
 
-        # Botón para descargar el archivo actualizado con zonas
         st.markdown("### 💾 Descargar zonas actuales")
         csv_actualizado = st.session_state.df.to_csv(index=False).encode("utf-8")
         st.download_button(
@@ -244,6 +243,8 @@ def tab_mapa():
             ).add_to(m)
 
         st_folium(m, width=900, height=700)
+
+
 # Ejecutar tabs
 tab_subir_archivo()
 tab_evaluacion_riesgo()

@@ -1,0 +1,5 @@
+streamlit==1.27.2
+pandas
+folium
+streamlit-folium
+requests

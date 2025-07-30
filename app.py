@@ -3,26 +3,10 @@ import pandas as pd
 import json
 import random
 import folium
-import requests
-import datetime
 from streamlit_folium import st_folium
 
 st.set_page_config(page_title="Detección de Riesgo Agrícola", layout="wide")
 st.title("🌾 Detección de Riesgo Agrícola - MVP")
-
-# Función para obtener clima real desde NASA POWER
-def obtener_datos_climaticos(lat, lon):
-    hoy = datetime.date.today()
-    ayer = hoy - datetime.timedelta(days=1)
-    url = f"https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,PRECTOT&community=AG&longitude={lon}&latitude={lat}&start={ayer.strftime('%Y%m%d')}&end={ayer.strftime('%Y%m%d')}&format=JSON"
-    try:
-        response = requests.get(url)
-        data = response.json()
-        temperatura = data['properties']['parameter']['T2M'][ayer.strftime('%Y%m%d')]
-        lluvia = data['properties']['parameter']['PRECTOT'][ayer.strftime('%Y%m%d')]
-        return temperatura, lluvia
-    except:
-        return None, None
 
 # Variables de sesión para mantener los datos
 if "df" not in st.session_state:
@@ -85,7 +69,6 @@ def tab_subir_archivo():
             st.session_state.df = pd.concat([st.session_state.df, nueva_fila], ignore_index=True)
             st.success("✅ Ubicación añadida")
             st.dataframe(st.session_state.df, use_container_width=True)
-            tab_evaluacion_riesgo()
 
         # Botón para descargar el archivo actualizado con zonas
         st.markdown("### 💾 Descargar zonas actuales")
@@ -121,11 +104,8 @@ def tab_evaluacion_riesgo():
             reglas = config_cultivos[cultivo]
             random.seed(f"{zona}{cultivo}{lat}{lon}")
             ndvi = round(random.uniform(0.2, 0.8), 2)
-
-            temperatura, lluvia = obtener_datos_climaticos(lat, lon)
-            if temperatura is None or lluvia is None:
-                temperatura = round(random.uniform(20, 40), 1)
-                lluvia = round(random.uniform(0, 50), 1)
+            lluvia = round(random.uniform(0, 50), 1)
+            temperatura = round(random.uniform(20, 40), 1)
 
             riesgo = "Bajo"
             recomendacion = reglas["recomendacion_baja"]

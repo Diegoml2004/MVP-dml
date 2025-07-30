@@ -1,18 +1,14 @@
 [project]
-name = "agtech-risk-detector"
+name = "agtech-dml"
 version = "0.1.0"
-description = "Prototipo Streamlit para evaluación de riesgo agrícola"
-authors = ["Diego Molestina"]
+description = ""
+authors = ["Tu Nombre <tu@email.com>"]
+requires-python = ">=3.11"
 dependencies = [
   "folium>=0.20.0",
   "pandas>=2.3.1",
   "streamlit-folium>=0.25.0",
   "streamlit>=1.47.0",
-  "requests>=2.31.0",
   "python-dotenv>=1.0.0",
-  "sentinelhub>=3.10.1"
+  "requests>=2.31.0"
 ]
-
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
